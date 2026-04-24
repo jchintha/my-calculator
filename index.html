@@ -3,38 +3,56 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>My Calculator</title>
+  <title>MNIST Neural Net Visualizer</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <main class="calculator">
-    <h1>My Calculator</h1>
-    <input id="display" type="text" readonly value="0" aria-label="display" />
-    <div class="keys">
-      <button data-action="clear" class="span-2">C</button>
-      <button data-action="back">←</button>
-      <button data-op="/">÷</button>
+  <main>
+    <header>
+      <h1>MNIST Neural Net Visualizer</h1>
+      <p>Draw a digit (0–9). Watch it flow through a 784 → 128 → 64 → 10 MLP trained from scratch with numpy.</p>
+    </header>
 
-      <button data-digit="7">7</button>
-      <button data-digit="8">8</button>
-      <button data-digit="9">9</button>
-      <button data-op="*">×</button>
+    <section class="panels">
+      <div class="panel">
+        <h2>Draw</h2>
+        <canvas id="draw" width="280" height="280"></canvas>
+        <div class="controls">
+          <button id="clear">Clear</button>
+        </div>
+      </div>
 
-      <button data-digit="4">4</button>
-      <button data-digit="5">5</button>
-      <button data-digit="6">6</button>
-      <button data-op="-">−</button>
+      <div class="panel">
+        <h2>Input (28×28)</h2>
+        <canvas id="input-preview" width="140" height="140"></canvas>
+        <p class="hint">Downscaled, greyscale, [0,1].</p>
+      </div>
 
-      <button data-digit="1">1</button>
-      <button data-digit="2">2</button>
-      <button data-digit="3">3</button>
-      <button data-op="+">+</button>
+      <div class="panel">
+        <h2>Hidden 1 — ReLU (128)</h2>
+        <canvas id="h1" width="256" height="128"></canvas>
+        <p class="hint">Post-activation. Brighter = higher.</p>
+      </div>
 
-      <button data-digit="0" class="span-2">0</button>
-      <button data-action="dot">.</button>
-      <button data-action="equals" class="equals">=</button>
-    </div>
+      <div class="panel">
+        <h2>Hidden 2 — ReLU (64)</h2>
+        <canvas id="h2" width="128" height="128"></canvas>
+        <p class="hint">Post-activation. Brighter = higher.</p>
+      </div>
+
+      <div class="panel output">
+        <h2>Output — Softmax</h2>
+        <div id="prediction">—</div>
+        <div id="probs"></div>
+      </div>
+    </section>
+
+    <footer>
+      <a href="https://github.com/jchintha/my-calculator" target="_blank" rel="noopener">source</a>
+    </footer>
   </main>
+
+  <script src="model.js"></script>
   <script src="app.js"></script>
 </body>
 </html>
