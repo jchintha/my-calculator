@@ -1,0 +1,6 @@
+.venv/
+data/
+weights.npz
+__pycache__/
+*.pyc
+HelloWorld.class
